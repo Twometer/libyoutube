@@ -1,23 +1,24 @@
 # libyoutube
-Unofficial YouTube API with support for decrypting streams.
+An unofficial YouTube API with support for decrypting streams.
 
-## Supported features
+## Features
 1. Searching for videos
 2. Getting metadata for videos
-3. Downloading and decrypting the download URLs for the video streams 
+3. Downloading and decrypting the video/audio stream URLs 
 
-## Usage
-You can use the library either with Gradle or Maven from Maven Central using
+## Download
+You can use the library either with Gradle or Maven using
 ```
 implementation 'de.twometer.libyoutube:libyoutube:1.0-SNAPSHOT'
 ```
-or by downloading a JAR file from the release section of the repo. Alternatively,
-you can also build the repository yourself.
+or you can download the latest JAR file from the release section of this repo.
+
+Alternatively, you can also build the repository yourself.
 
 ## Getting Started
 // TODO
 
-## License
+## Legal stuff
 This library is based on the C# library `libvideo` made by [i3arnon](https://github.com/i3arnon)
 
 The `libvideo` copyright notice is as folllows:
@@ -48,3 +49,5 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
+
+Also, I am not in any way associated with YouTube or Google. This is a completely unofficial project.
