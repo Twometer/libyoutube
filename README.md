@@ -9,14 +9,46 @@ An unofficial YouTube API with support for decrypting streams.
 ## Download
 You can use the library either with Gradle or Maven using
 ```
-implementation 'de.twometer.libyoutube:libyoutube:1.0-SNAPSHOT'
+implementation 'de.twometer.libyoutube:libyoutube:1.0'
 ```
 or you can download the latest JAR file from the release section of this repo.
 
 Alternatively, you can also build the repository yourself.
 
 ## Getting Started
-// TODO
+The API has a main class called `YouTube`. From there you can access
+all the features of this library. Information about a video is provided
+by the `Video` class, and accessing streams is provided using the `VideoStream`
+class.
+
+To get you started, I have some example code for you:
+
+### Searching for videos
+```java
+YouTube youTube = new YouTube();
+List<Video> videos = youTube.search("your query");
+for (Video video : videos) {
+    String title = video.getTitle();
+    // ...
+}
+```
+
+### Getting the stream URL
+```java
+YouTube youTube = new YouTube();
+List<VideoStream> videoStreams = youTube.getStreams("your video id");
+for (VideoStream videoStream : videoStreams) {
+    String url = videoStream.getUrl().get();
+    // ...
+}
+```
+
+### Downloading metadata
+```java
+YouTube youTube = new YouTube();
+Video video = youTube.getMetadata("your video id");
+// ...
+```
 
 ## Legal stuff
 This library is based on the C# library `libvideo` made by [i3arnon](https://github.com/i3arnon)

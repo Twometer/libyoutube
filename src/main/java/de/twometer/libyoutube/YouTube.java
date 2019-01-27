@@ -2,7 +2,9 @@ package de.twometer.libyoutube;
 
 import de.twometer.libyoutube.core.MetadataParser;
 import de.twometer.libyoutube.core.SearchResultParser;
+import de.twometer.libyoutube.core.StreamParser;
 import de.twometer.libyoutube.model.Video;
+import de.twometer.libyoutube.model.VideoStream;
 import de.twometer.libyoutube.web.YouTubeRequest;
 import okhttp3.OkHttpClient;
 import org.json.JSONArray;
@@ -28,6 +30,17 @@ public class YouTube {
         String requestUrl = String.format("https://www.youtube.com/watch?v=%s&pbj=1", URLEncoder.encode(videoId, CHARSET));
         JSONArray response = loadJsonArray(requestUrl);
         return MetadataParser.fromResponse(response)
+                .parse();
+    }
+
+    public List<VideoStream> getStreams(String videoId) throws IOException {
+        String requestUrl = String.format("https://www.youtube.com/watch?v=%s&pbj=1", URLEncoder.encode(videoId, CHARSET));
+        JSONArray response = loadJsonArray(requestUrl);
+
+        Video video = MetadataParser.fromResponse(response)
+                .parse();
+
+        return StreamParser.fromResponse(video, response)
                 .parse();
     }
 
