@@ -11,7 +11,7 @@ public class MetadataTest {
     @Test
     public void testMetadataFetch() throws IOException {
         YouTube youTube = new YouTube();
-        Video video = youTube.getMetadata("eYCKHNINwVA");
+        Video video = youTube.getMetadata("1Y897KnVlQ4");
         Utils.logVideo(video);
     }
 

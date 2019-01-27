@@ -50,6 +50,8 @@ public class CompressedRequest {
         int read;
         while ((read = inputStream.read(buf)) > 0) outputStream.write(buf, 0, read);
 
+        body.close();
+
         return new String(outputStream.toByteArray(), StandardCharsets.UTF_8);
     }
 

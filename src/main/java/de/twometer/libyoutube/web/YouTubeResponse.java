@@ -12,6 +12,7 @@ public class YouTubeResponse {
 
     YouTubeResponse(ResponseBody responseBody) throws IOException {
         this.response = responseBody.string();
+        responseBody.close();
     }
 
     public JSONObject jsonObject() {
