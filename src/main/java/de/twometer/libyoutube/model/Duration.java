@@ -17,19 +17,35 @@ public class Duration {
         seconds = (int) (totalSeconds - hours * 3600.0D - minutes * 60.0D);
     }
 
+    private Duration(int hours, int minutes, int seconds) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
+
+    public static Duration fromString(String string) {
+        string = string.trim();
+        String[] parts = string.split(":");
+        if (parts.length == 2) return new Duration(0, Integer.valueOf(parts[0]), Integer.valueOf(parts[1]));
+        else if (parts.length == 3)
+            return new Duration(Integer.valueOf(parts[0]), Integer.valueOf(parts[1]), Integer.valueOf(parts[2]));
+
+        throw new IllegalArgumentException("The given duration string is not in a correct format");
+    }
+
     public double getTotalSeconds() {
         return totalSeconds;
     }
 
-    public int getHours() {
+    private int getHours() {
         return hours;
     }
 
-    public int getMinutes() {
+    private int getMinutes() {
         return minutes;
     }
 
-    public int getSeconds() {
+    private int getSeconds() {
         return seconds;
     }
 

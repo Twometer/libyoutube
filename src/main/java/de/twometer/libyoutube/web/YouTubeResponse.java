@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-class YouTubeResponse {
+public class YouTubeResponse {
 
     private String response;
 
@@ -19,7 +19,7 @@ class YouTubeResponse {
     }
 
     public JSONArray jsonArray() {
-        return new JSONArray();
+        return new JSONArray(response);
     }
 
 }
