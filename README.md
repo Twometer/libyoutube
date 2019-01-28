@@ -6,15 +6,6 @@ An unofficial YouTube API with support for decrypting streams.
 2. Getting metadata for videos
 3. Downloading and decrypting the video/audio stream URLs 
 
-## Download
-You can use the library either with Gradle or Maven using
-```
-implementation 'de.twometer.libyoutube:libyoutube:1.0'
-```
-or you can download the latest JAR file from the release section of this repo.
-
-Alternatively, you can also build the repository yourself.
-
 ## Getting Started
 The API has a main class called `YouTube`. From there you can access
 all the features of this library. Information about a video is provided
