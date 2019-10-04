@@ -1,6 +1,6 @@
 package de.twometer.libyoutube.decoder;
 
-import de.twometer.libyoutube.util.RegexUtility;
+import de.twometer.libyoutube.util.Regex;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,12 +19,12 @@ class JsDecrypter {
     void addFunction(String js, String function) {
         String escapedFunction = Pattern.quote(function);
         FunctionType type = null;
-        if (RegexUtility.isMatch(js, escapedFunction + ":\\bfunction\\b\\(\\w+\\)"))
-            type = FunctionType.Reverse;
-        else if (RegexUtility.isMatch(js, escapedFunction + ":\\bfunction\\b\\([a],b\\).(\\breturn\\b)?.?\\w+\\."))
+        if (Regex.isMatch(js, "(\\\")?" + escapedFunction + "(\\\")?:\\bfunction\\b\\([a],b\\).(\\breturn\\b)?.?\\w+\\."))
             type = FunctionType.Slice;
-        else if (RegexUtility.isMatch(js, escapedFunction + ":\\bfunction\\b\\(\\w+\\,\\w\\).\\bvar\\b.\\bc=a\\b"))
+        else if (Regex.isMatch(js, "(\\\")?" + escapedFunction + "(\\\")?:\\bfunction\\b\\(\\w+\\,\\w\\).\\bvar\\b.\\bc=a\\b"))
             type = FunctionType.Swap;
+        else if (Regex.isMatch(js, "(\\\")?" + escapedFunction + "(\\\")?:\\bfunction\\b\\(\\w+\\)\\{\\w+\\.reverse"))
+            type = FunctionType.Reverse;
 
         if (type != null)
             functionTypes.put(function, type);
@@ -62,8 +62,8 @@ class JsDecrypter {
     private String swap(String signature, int index) {
         StringBuilder builder = new StringBuilder();
         builder.append(signature);
-        builder.setCharAt(0, signature.charAt(index));
-        builder.setCharAt(index, signature.charAt(0));
+        builder.setCharAt(0, signature.charAt(index % builder.length()));
+        builder.setCharAt(index % builder.length(), signature.charAt(0));
         return builder.toString();
     }
 

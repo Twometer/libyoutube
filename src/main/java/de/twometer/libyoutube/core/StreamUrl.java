@@ -34,15 +34,17 @@ public class StreamUrl {
 
     private void decode() throws IOException {
         Query query = Query.parse(decoderData.getUrl());
-        String signature = query.get("signature");
+        String signature = query.get(decoderData.getSignatureKey());
         if (signature == null) {
             url = decoderData.getUrl();
             return;
         }
+        if (signature.isEmpty())
+            throw new RuntimeException("Signature not found");
 
         String jsPlayer = CompressedRequest.forUrl(decoderData.getJsPlayer()).execute(client);
         SignatureDecoder signatureDecoder = new SignatureDecoder(jsPlayer, signature);
-        query.set("signature", signatureDecoder.decode());
+        query.set(decoderData.getSignatureKey(), signatureDecoder.decode());
 
         url = query.toString();
     }

@@ -10,11 +10,14 @@ public class DecoderData {
 
     private int formatCode;
 
-    public DecoderData(String url, String jsPlayer, boolean isEncrypted, int formatCode) {
+    private String signatureKey;
+
+    public DecoderData(String url, String jsPlayer, boolean isEncrypted, int formatCode, String signatureKey) {
         this.url = url;
         this.jsPlayer = jsPlayer;
         this.isEncrypted = isEncrypted;
         this.formatCode = formatCode;
+        this.signatureKey = signatureKey;
     }
 
     public String getUrl() {
@@ -31,5 +34,9 @@ public class DecoderData {
 
     public int getFormatCode() {
         return formatCode;
+    }
+
+    public String getSignatureKey() {
+        return signatureKey;
     }
 }

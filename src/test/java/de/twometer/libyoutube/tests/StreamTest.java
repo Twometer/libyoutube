@@ -14,7 +14,7 @@ public class StreamTest {
     @Test
     public void testStream() throws IOException {
         YouTube youTube = new YouTube();
-        List<VideoStream> streams = youTube.getStreams("-GktSUYRO3M");
+        List<VideoStream> streams = youTube.getStreams("e9nLvWHBdbk");
         for (VideoStream stream : streams) {
             StreamFormat format = stream.getStreamFormat();
             System.out.println(format.getStreamType() + " " + format.getVideoFormat() + " " + format.getAudioFormat() + " " + format.getAudioBitrate());

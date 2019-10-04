@@ -63,23 +63,25 @@ public class StreamParser {
     }
 
     private DecoderData prepareDecoder(String queryString, String jsPlayer) throws UnsupportedEncodingException {
+        queryString = queryString.replace("\\u0026", "&");
         Query query = Query.parse(queryString);
 
+        String sp = query.has("sp") ? query.get("sp") : "signature";
         String url = query.get("url");
         boolean encrypted = false;
 
         if (query.has("s")) {
             encrypted = true;
-            url += buildSignatureString(query.get("s"), query);
+            url += buildSignatureString(sp, query.get("s"), query);
         } else if (query.has("sig"))
-            url += buildSignatureString(query.get("sig"), query);
+            url += buildSignatureString(sp, query.get("sig"), query);
 
         url = decodeUrl(url);
         Query urlQuery = Query.parse(url);
         if (!urlQuery.has("ratebypass"))
             url += "&ratebypass=yes";
 
-        return new DecoderData(url, jsPlayer, encrypted, urlQuery.getInt("itag"));
+        return new DecoderData(url, jsPlayer, encrypted, urlQuery.getInt("itag"), sp);
     }
 
     private String decodeUrl(String url) throws UnsupportedEncodingException {
@@ -88,8 +90,8 @@ public class StreamParser {
         return url;
     }
 
-    private String buildSignatureString(String signature, Query query) {
-        String result = "&signature=" + signature;
+    private String buildSignatureString(String key, String signature, Query query) {
+        String result = "&" + key + "=" + signature;
         String host = query.get("fallback_host");
         if (host != null)
             result += "&fallback_host=" + host;
