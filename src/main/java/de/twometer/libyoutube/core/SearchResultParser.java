@@ -43,7 +43,7 @@ public class SearchResultParser {
 
             String videoId = obj.getString("videoId");
             List<Thumbnail> thumbnails = ThumbnailParser.parseThumbnails(obj.getJSONObject("thumbnail").getJSONArray("thumbnails"));
-            String title = obj.getJSONObject("title").getString("simpleText");
+            String title = obj.getJSONObject("title").getJSONArray("runs").getJSONObject(0).getString("text");
             Duration duration = Duration.fromString(obj.getJSONObject("lengthText").getString("simpleText"));
             String author = obj.getJSONObject("longBylineText").getJSONArray("runs").getJSONObject(0).getString("text");
             results.add(new Video(videoId, title, author, thumbnails, duration));

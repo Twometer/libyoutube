@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 public class SignatureDecoder {
 
-    private static final Pattern decryptionFunctionRegex = Pattern.compile("\\bc\\s*&&\\s*d\\.set\\([^,]+\\s*,[^(]*\\(([a-zA-Z0-9$]+)\\(");
-    private static final Pattern functionRegex = Pattern.compile("\\w+(?:.|\\[)(\\\"?\\w+(?:\\\")?)\\]?\\(");
+    private static final Pattern decryptionFunctionRegex = Pattern.compile("\\bc\\s*&&\\s*a\\.set\\([^,]+,\\s*(?:encodeURIComponent\\s*\\()?\\s*([\\w$]+)\\(");
+    private static final Pattern functionRegex = Pattern.compile("\\w+\\.(\\w+)\\(");
 
     private String jsPlayer;
     private String signature;
@@ -22,14 +22,14 @@ public class SignatureDecoder {
         for (String functionLine : functionLines) {
             if (decryptor.isComplete())
                 break;
-            Matcher matcher = functionRegex.matcher(functionLine);
+            Matcher matcher = functionRegex.matcher(functionLine.replace("[\"", ".").replace("\"]", ""));
             if (matcher.find()) {
                 decryptor.addFunction(jsPlayer, matcher.group(1));
             }
         }
 
         for (String functionLine : functionLines) {
-            Matcher matcher = functionRegex.matcher(functionLine);
+            Matcher matcher = functionRegex.matcher(functionLine.replace("[\"", ".").replace("\"]", ""));
             if (matcher.find())
                 signature = decryptor.executeFunction(signature, functionLine, matcher.group(1));
         }

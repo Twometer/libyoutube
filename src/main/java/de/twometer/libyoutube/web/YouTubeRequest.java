@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class YouTubeRequest {
 
-    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.0.0 Safari/537.36";
+    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
     private static final String REFERER = "https://www.youtube.com/";
     private static final String CLIENT_NAME = "1";
-    private static final String CLIENT_VERSION = "2.20190119";
+    private static final String CLIENT_VERSION = "2.20191003.05.02";
 
     private Request request;
 
