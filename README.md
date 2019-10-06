@@ -1,4 +1,6 @@
 # libyoutube
+> Note: This is currently not working due to YouTube changing their algorithms. I will look into this.
+
 An unofficial YouTube API with support for decrypting streams.
 
 ## Features
